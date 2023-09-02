@@ -3,6 +3,8 @@ const { sequelize } = require("./configs/db");
 const jwt = require("jsonwebtoken");
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
+const { instructorRouter } = require("./routes/instructor.route");
+const { courseRouter } = require("./routes/course.route");
 
 const app = express();
 
@@ -17,6 +19,9 @@ app.get("/", async (req, res) => {
     res.send({ error: err.message });
   }
 });
+
+app.use("", courseRouter);
+app.use("", instructorRouter);
 
 sequelize
   .sync()
