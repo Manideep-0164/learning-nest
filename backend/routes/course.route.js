@@ -1,12 +1,12 @@
 const express = require("express");
-const { Assignment } = require("../model/assignment.model");
-const { Course } = require("../model/course.model");
-const { Enrollment } = require("../model/enrollment.model");
-const { Student } = require("../model/student.model");
-const { Submission } = require("../model/submissions.model");
+const { Assignment } = require("../models/assignment.model");
+const { Course } = require("../models/course.model");
+const { Enrollment } = require("../models/enrollment.model");
+const { Student } = require("../models/student.model");
+const { Submission } = require("../models/submissions.model");
 const { sequelize } = require("../configs/db");
 const { Sequelize } = require("sequelize");
-const { Instructor } = require("../model/instructor.model");
+const { Instructor } = require("../models/instructor.model");
 const courseRouter = express.Router();
 const { authorize } = require("../middlewares/authorization.middleware");
 const { authentication } = require("../middlewares/authentication.middleware");
@@ -60,7 +60,7 @@ courseRouter.get(
           FROM courses c
           JOIN enrollments e ON c.id = e.course_id
           JOIN students s ON e.student_id = s.id
-          JOIN instructors i ON c.id = i.course_id
+          LEFT JOIN instructors i ON c.id = i.course_id
           WHERE s.id = :studentId
         `;
 
