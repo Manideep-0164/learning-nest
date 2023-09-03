@@ -89,6 +89,7 @@ instructorRouter.post("/api/instructor/signin", async (req, res) => {
       token: token,
       name: instructorExist.name,
       id: instructorExist.id,
+      course_id: instructorExist.course_id,
     });
   } catch (err) {
     console.error("Error fetching instructors:", err);
