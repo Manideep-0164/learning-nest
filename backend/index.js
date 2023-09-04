@@ -6,6 +6,7 @@ require("dotenv").config();
 const { instructorRouter } = require("./routes/instructor.route");
 const { courseRouter } = require("./routes/course.route");
 const { enrollmentRouter } = require("./routes/enrollment.route");
+const { assignmentRouter } = require("./routes/assignment.route");
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.get("/", async (req, res) => {
 app.use("", courseRouter);
 app.use("", instructorRouter);
 app.use("", enrollmentRouter);
+
+app.use("", assignmentRouter);
 
 sequelize
   .sync()
