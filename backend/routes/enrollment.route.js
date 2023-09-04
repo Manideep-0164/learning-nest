@@ -71,6 +71,22 @@ enrollmentRouter.get(
   }
 );
 
+// get all enrollments
+enrollmentRouter.get(
+  "/api/enrollment",
+  authentication,
+  authorize(["admin"]),
+  async (req, res) => {
+    try {
+      const enrollmentData = await Enrollment.findAll({});
+      res.json(enrollmentData);
+    } catch (err) {
+      console.error("Error fetching enrollments:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 module.exports = {
   enrollmentRouter,
 };
