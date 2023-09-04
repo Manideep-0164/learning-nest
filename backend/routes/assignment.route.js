@@ -67,6 +67,68 @@ assignmentRouter.get(
   }
 );
 
+// delete an assignment
+assignmentRouter.delete(
+  "/api/assignment/:id",
+  authorize(["instructor", "admin"]),
+  async (req, res) => {
+    try {
+      const isAssignmentExist = await Assignment.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      if (!isAssignmentExist)
+        return res.status(404).json({ message: "Assignment does not exist." });
+
+      await Assignment.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      res.json({ message: "Assignment Deleted." });
+    } catch (err) {
+      console.error("Error fetching assignments:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
+// update an assignment
+assignmentRouter.patch(
+  "/api/assignment/:id",
+  authorize(["instructor", "admin"]),
+  async (req, res) => {
+    try {
+      const updatedAssignment = req.body;
+
+      if (updatedAssignment.id)
+        return res.json({ message: "Exclude the assignment id!" });
+
+      const isAssignmentExist = await Assignment.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+
+      if (!isAssignmentExist)
+        return res.status(404).json({ message: "Assignment does not exist." });
+
+      await Assignment.update(updatedAssignment, {
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.json({ message: "Assignment Updated." });
+    } catch (err) {
+      console.error("Error fetching assignments:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 module.exports = {
   assignmentRouter,
 };
