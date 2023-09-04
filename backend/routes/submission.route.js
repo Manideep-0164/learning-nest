@@ -88,6 +88,57 @@ submissionRouter.get(
   }
 );
 
+submissionRouter.get(
+  "/api/submission",
+  authentication,
+  authorize(["admin"]),
+  async (req, res) => {
+    try {
+      const submissionsData = await Submission.findAll({});
+      res.json(submissionsData);
+    } catch (err) {
+      console.error("Error fetching submissions:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
+// get student submissions.
+submissionRouter.get("/api/submission/student", async (req, res) => {
+  try {
+    Submission.belongsTo(Student, { foreignKey: "student_id" });
+    Submission.belongsTo(Assignment, { foreignKey: "assignment_id" });
+
+    Student.hasMany(Submission, { foreignKey: "student_id" });
+    Assignment.hasMany(Submission, { foreignKey: "assignment_id" });
+
+    const submissionData = await Submission.findAll({
+      attributes: [
+        [sequelize.col("Student.name"), "student_name"],
+        [sequelize.col("Assignment.id"), "assignment_id"],
+        [sequelize.col("Assignment.title"), "assignment_name"],
+        [sequelize.col("Assignment.due_date"), "due_date"],
+        "submission_date",
+        "status",
+      ],
+      include: [
+        {
+          model: Student,
+          attributes: [],
+        },
+        {
+          model: Assignment,
+          attributes: [],
+        },
+      ],
+    });
+    res.json(submissionData);
+  } catch (err) {
+    console.error("Error fetching submissions:", err);
+    res.send({ error: err.message });
+  }
+});
+
 module.exports = {
   submissionRouter,
 };
