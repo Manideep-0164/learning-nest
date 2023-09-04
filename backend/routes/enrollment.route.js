@@ -33,6 +33,44 @@ enrollmentRouter.post(
   }
 );
 
+// get all students all enrolled courses with enroll_date
+enrollmentRouter.get(
+  "/api/enrollment/student/course",
+  authentication,
+  authorize(["admin"]),
+  async (req, res) => {
+    try {
+      Enrollment.belongsTo(Student, { foreignKey: "student_id" });
+      Enrollment.belongsTo(Course, { foreignKey: "course_id" });
+
+      Student.hasMany(Enrollment, { foreignKey: "student_id" });
+      Course.hasMany(Enrollment, { foreignKey: "course_id" });
+
+      const enrollmentData = await Enrollment.findAll({
+        attributes: [
+          [sequelize.col("Student.name"), "student_name"],
+          [sequelize.col("Course.name"), "course_name"],
+          "enroll_date",
+        ],
+        include: [
+          {
+            model: Student,
+            attributes: [],
+          },
+          {
+            model: Course,
+            attributes: [],
+          },
+        ],
+      });
+      res.json(enrollmentData);
+    } catch (err) {
+      console.error("Error fetching enrollments:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 module.exports = {
   enrollmentRouter,
 };
