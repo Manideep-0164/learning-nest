@@ -75,7 +75,7 @@ studentRouter.post("/api/student/signin", async (req, res) => {
       email: studentExist.email,
     };
     const token = jwt.sign(payload, process.env.STUDENT_SECRET, {
-      expiresIn: "1H",
+      expiresIn: "12H",
     });
 
     res.json({
