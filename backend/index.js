@@ -8,6 +8,7 @@ const { courseRouter } = require("./routes/course.route");
 const { enrollmentRouter } = require("./routes/enrollment.route");
 const { assignmentRouter } = require("./routes/assignment.route");
 const { submissionRouter } = require("./routes/submission.route");
+const { announcementRouter } = require("./routes/announcement.route");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("", courseRouter);
 app.use("", instructorRouter);
 app.use("", enrollmentRouter);
 app.use("", submissionRouter);
+app.use("", announcementRouter);
 
 app.use("", assignmentRouter);
 
