@@ -163,6 +163,57 @@ assignmentRouter.get(
   }
 );
 
+// -- get all the assignments and submissions of a specific student(id)
+assignmentRouter.get(
+  "/api/assignment/student/:id",
+  authorize(["student", "instructor", "admin"]),
+  async (req, res) => {
+    try {
+      Student.hasMany(Enrollment, { foreignKey: "student_id" });
+      Enrollment.belongsTo(Student, { foreignKey: "student_id" });
+
+      Student.hasMany(Submission, { foreignKey: "student_id" });
+      Submission.belongsTo(Student, { foreignKey: "student_id" });
+
+      Course.hasMany(Enrollment, { foreignKey: "course_id" });
+      Enrollment.belongsTo(Course, { foreignKey: "course_id" });
+
+      Course.hasMany(Assignment, { foreignKey: "course_id" });
+      Assignment.belongsTo(Course, { foreignKey: "course_id" });
+
+      const query = `
+              SELECT a.*, c.name AS course, sb.submission_date, sb.status
+              FROM assignments a
+              JOIN courses c ON a.course_id = c.id
+              JOIN enrollments e ON c.id = e.course_id
+              JOIN students s ON e.student_id = s.id
+              LEFT JOIN (
+                  SELECT assignment_id, student_id, MAX(submission_date) AS latest_submission_date
+                  FROM submissions
+                  GROUP BY assignment_id, student_id
+              ) ls ON a.id = ls.assignment_id AND s.id = ls.student_id
+              LEFT JOIN submissions sb ON ls.assignment_id = sb.assignment_id AND ls.student_id = sb.student_id AND ls.latest_submission_date = sb.submission_date
+              WHERE s.id = :studentId
+          `;
+
+      const studentAssignmentData = await sequelize.query(query, {
+        type: Sequelize.QueryTypes.SELECT,
+        replacements: { studentId: req.params.id }, // Replace with the actual student ID
+      });
+
+      if (studentAssignmentData.length === 0)
+        return res.json({
+          message: "You did not have any assignments!",
+        });
+
+      res.json(studentAssignmentData);
+    } catch (err) {
+      console.error("Error fetching assignments:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 module.exports = {
   assignmentRouter,
 };
