@@ -129,6 +129,40 @@ assignmentRouter.patch(
   }
 );
 
+// -- get the assignments of a specific course(id)
+assignmentRouter.get(
+  "/api/assignment/course/:id",
+  authorize(["student", "instructor", "admin"]),
+  async (req, res) => {
+    try {
+      Course.hasMany(Assignment, { foreignKey: "course_id" });
+      Assignment.belongsTo(Course, { foreignKey: "course_id" });
+
+      const assignmentsData = await Assignment.findAll({
+        attributes: ["id", "title", "description", "due_date"],
+        include: [
+          {
+            model: Course,
+            attributes: ["name"],
+            as: "course",
+            where: {
+              id: req.params.id,
+            },
+          },
+        ],
+      });
+
+      if (!assignmentsData.length)
+        return res.json({ message: "No assignments available" });
+
+      res.json(assignmentsData);
+    } catch (err) {
+      console.error("Error fetching assignment:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 module.exports = {
   assignmentRouter,
 };
