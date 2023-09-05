@@ -1,0 +1,82 @@
+<title>Assignment</title>
+
+<div class="main">
+    <h2 class="title">{{assignment.title}}</h2>
+    <div class="duedate">
+        <span>Due Date: <strong>{{assignment.due_date}}</strong></span>
+    </div>
+    <div class="buttonsupdatedel">
+        <button class="noselect green" (click)="handleEdit(assignment.id)"><span class="text" >{{!isEdit? 'Cancel' : 'Edit'}}</span><span class="icon">
+            <i class="pi pi-pencil" style="font-size: 1.2rem ; color: white;"></i>
+        </span>
+        </button>
+
+        
+        
+        <button class="noselect red" (click)="deleteConfirm(assignment.id)"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span>
+        </button>
+
+        
+
+
+    </div>
+    <p-toast></p-toast>
+    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+    <div *ngIf="isEdit; else Editor">
+        <div class="assignment">
+            <h2>Description :</h2>
+            <div class="assignmentview" [innerHTML]="assignment.description ? sanitizeAndTrustHtml(assignment.description) : '<h1>Loading...</h1>'"></div>
+        </div>
+    
+        <div class="submit">
+            <span class="p-float-label">
+                <input pInputText id="username" />
+                <label htmlFor="username">Submit Your Link</label>
+            </span>
+            <span class="btn">
+                <p-button label="Submit" class="button" icon="pi pi-check"></p-button>
+            </span>
+        </div>
+    </div>
+
+
+
+   <ng-template #Editor>
+    <div class="assignadd">
+        <div class="coolinput">
+          <label for="input" class="text">Assignment Name:</label>
+          <input
+            type="text"
+            placeholder="Write here..."
+            name="input"
+            class="input"
+            [(ngModel)]="title"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+
+        <p-calendar
+          [(ngModel)]="due_date"
+          dateFormat="yy-mm-dd"
+          class="calender"
+          [showIcon]="true"
+          placeholder="Due Date"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-calendar>
+      </div>
+       <p-editor [(ngModel)]="text" [style]="{ height: 'max-height'}"></p-editor>
+
+      <div class="flex">
+          <button class="updateButton but" (click)="handleAssignmentUpdate(assignment.id)">
+           Update Assignment Details
+           <span>
+               <i class="pi pi-file-edit bi bi-discord" style="font-size: 1.5rem"></i>
+           </span>
+         </button>
+      </div>
+
+
+   </ng-template>
+
+</div>
