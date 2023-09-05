@@ -1,0 +1,117 @@
+<title>All Courses</title>
+
+<div class="main-container" >
+  
+
+<ng-template #content>
+  <div class="departmentscard" *ngFor="let dept of departments">
+    <p-toast position="top-center" key="tc"></p-toast>
+    <p-toast position="bottom-center" key="bc"></p-toast>
+    <div class="headers">
+      <i class="pi pi-book" style="font-size: 1.5rem; margin-right: 10px"></i>
+      <header class="login">{{ dept.name }}</header>
+    </div>
+
+    <div class="card">
+      <p-carousel
+        [value]="dept.courses"
+        [numVisible]="3"
+        [numScroll]="3"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+        autoPlayInterval="3000"
+        autoPlay="true"
+        class="depttitle"
+      >
+        <ng-template let-courses pTemplate="item">
+          <div class="plan">
+            <div class="inner">
+              <span class="pricing">
+                <span> ₹0 <small>/ m</small> </span>
+              </span>
+              <p class="title">{{ courses.name }}</p>
+              <p class="info">{{ courses.description }}</p>
+              <ul class="features">
+                <li>
+                  <span class="icon">
+                    <svg
+                      height="24"
+                      width="24"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        fill="currentColor"
+                        d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"
+                      ></path>
+                    </svg>
+                  </span>
+                  <span><strong>Empower with Experts </strong> </span>
+                </li>
+                <li>
+                  <span class="icon">
+                    <svg
+                      height="24"
+                      width="24"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        fill="currentColor"
+                        d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"
+                      ></path>
+                    </svg>
+                  </span>
+                  <span> <strong>Nurture Growth</strong></span>
+                </li>
+                <li>
+                  <span class="icon">
+                    <svg
+                      height="24"
+                      width="24"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        fill="currentColor"
+                        d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z"
+                      ></path>
+                    </svg>
+                  </span>
+                  <span><strong> Inspire Lifelong Learning</strong></span>
+                </li>
+              </ul>
+              <div class="action">
+                <a class="button" (click)="enrollCourses(courses.id)">
+                  Enroll Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</ng-template>
+
+<div class="main" *ngIf="is_loading; else content">
+    <div class="departmentscard"  *ngFor="let i of array">
+      <div class="border-round border-1 surface-border p-4 surface-card">
+        <p-skeleton
+          [style]="{ 'margin': '20px 0 20px 80px','padding':'30px' }"
+          width="20rem"
+          styleClass="mb-2"
+        ></p-skeleton>
+        <div class="flex">
+          <p-skeleton width="19rem" height="17rem"></p-skeleton>
+          <p-skeleton width="19rem" height="17rem"></p-skeleton>
+          <p-skeleton width="19rem" height="17rem"></p-skeleton>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 

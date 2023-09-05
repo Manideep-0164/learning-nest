@@ -1,0 +1,251 @@
+.main {
+  width: 60%;
+  margin: 30px auto;
+  position: sticky;
+  top: 50px;
+}
+
+
+
+.card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border-radius: 0.6rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+}
+
+.img {
+  margin-left: 15px;
+  padding-right: 20px;
+  border-right: 2px solid rgba(0, 0, 0, 0.12);
+}
+
+.hover_color_bubble {
+  position: absolute;
+  background: rgb(54 81 207 / 15%);
+  width: 120rem;
+  height: 100rem;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  top: 16rem;
+  border-radius: 50%;
+  transform: rotate(-36deg);
+  left: -18rem;
+  transition: 0.7s;
+}
+
+.deadline {
+  display: flex;
+  align-items: center;
+  font-weight: lighter;
+  color: grey;
+}
+
+
+.deadline>span {
+  margin-left: 3px;
+  font-size: 1rem;
+}
+
+.detail-section {
+  display: flex;
+  margin-left: 12px;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+}
+
+.calender {
+  margin-top: 28px;
+  /* border: 1px solid #818CF8; */
+  outline: 1px solid #818CF8;
+  border-radius: .3em !important;
+
+}
+
+
+.coolinput {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: static;
+  width: 340px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.coolinput label.text {
+  font-size: 0.75rem;
+  color: #818CF8;
+  font-weight: 700;
+  position: relative;
+  top: 0.5rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background: #ffff;
+  width: fit-content;
+}
+
+.coolinput input[type=text].input {
+  padding: 11px 10px;
+  font-size: 1rem;
+  border: 2px #818CF8 solid;
+  border-radius: 5px;
+  background: #ffff;
+  height: 50px;
+}
+
+.coolinput input[type=text].input:focus {
+  outline: none;
+}
+
+.assignadd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+.button2 {
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  color: #ffffff;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  border: 1px solid #016DD9;
+  box-shadow: 6px 6px 12px #c5c5c5,
+    -6px -6px 12px #ffffff;
+  background-color: #2170bf;
+
+}
+
+.button2:active {
+  color: #016DD9;
+  box-shadow: inset 4px 4px 12px #c5c5c5,
+    inset -4px -4px 12px #ffffff;
+}
+
+.button2:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.25);
+  top: 100%;
+  width: 140%;
+  height: 180%;
+  background-color: rgba(197, 22, 22, 0.05);
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:after {
+  content: "";
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.45);
+  top: 180%;
+  width: 160%;
+  height: 190%;
+  background-color: #016DD9;
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button2:hover {
+  color: #ffffff;
+  border: 1px solid #016DD9;
+}
+
+.button2:hover:before {
+  top: -35%;
+  background-color: #016DD9;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.button2:hover:after {
+  top: -45%;
+  background-color: #016DD9;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+
+
+.dots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: #b3d4fc;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.dot:last-child {
+  margin-right: 0;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.3s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.1s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: #6793fb;
+    box-shadow: 0 0 0 10px rgba(178, 212, 252, 0);
+  }
+
+  100% {
+    transform: scale(0.8);
+    background-color: #b3d4fc;
+    box-shadow: 0 0 0 0 rgba(178, 212, 252, 0.7);
+  }
+}

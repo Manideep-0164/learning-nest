@@ -1,0 +1,254 @@
+.main {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border-radius: 0.5rem;
+    padding: 20px;
+
+}
+
+
+.title {
+    text-align: center;
+    color: #6558d3;
+    font-weight: 500;
+    font-size: 30px;
+    text-decoration: underline;
+}
+
+.duedate {
+    text-align: end;
+    color: gray;
+} 
+
+.assignment {
+    width: 100%;
+}
+
+pre {
+    font-weight: 300;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+    word-spacing: 1px;
+    letter-spacing: 0.5px;
+}
+
+.assignment>h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.submit{
+    width: 100%;
+    margin: 30px auto;
+}
+
+.submit>span{
+  width: 400px;
+  margin: auto;
+}
+
+.btn{
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.submit>span>input{
+  width: 400px;
+}
+
+
+.assignmentview{
+    width:95%;  
+    margin:auto;
+    font-size: medium;
+    background-color: #E0E0E0;
+    padding: 20px;
+    border-radius: 0.5rem;
+}
+  
+
+button {
+    width: 160px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    
+   }
+   
+   .red{
+    background: red;
+   }
+
+   .green{
+    background:rgb(82, 93, 218) ;
+   }
+
+   button, button span {
+    transition: 200ms;
+   }
+   
+   button .text {
+    transform: translateX(35px);
+    color: white;
+    font-weight: bold;
+   }
+   
+   .red .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+   }
+   .green .icon {
+    position: absolute;
+    border-left: 1px solid #000000;
+    transform: translateX(110px);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   
+   button svg {
+    width: 15px;
+    fill: #eee;
+   }
+   
+
+   
+   .red:hover {
+    background: #ff3636;
+   }
+   
+   .green:hover {
+    background: rgba(88,101,242,1);
+   }
+   
+   button:hover .text {
+    color: transparent;
+   }
+   
+   button:hover .icon {
+    width: 150px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+   button:focus {
+    outline: none;
+   }
+   
+   button:active .icon svg {
+    transform: scale(0.8);
+   }
+
+   .buttonsupdatedel{
+    margin: 20px 0 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   }
+
+
+   .coolinput {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    position: static;
+    width: 340px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .coolinput label.text {
+    font-size: 0.75rem;
+    color: #818CF8;
+    font-weight: 700;
+    position: relative;
+    top: 0.5rem;
+    margin: 0 0 0 7px;
+    padding: 0 3px;
+    background: #ffff;
+    width: fit-content;
+  }
+  
+  .coolinput input[type=text].input {
+    padding: 11px 10px;
+    font-size: 1rem;
+    border: 2px #818CF8 solid;
+    border-radius: 5px;
+    background: #ffff;
+    height: 50px;
+  }
+  
+  .coolinput input[type=text].input:focus {
+    outline: none;
+  }
+
+  .assignadd{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+  .updateButton {
+    width: 335px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    padding: 0.875rem 72px 0.875rem 1.75rem;
+    background-color: rgba(88,101,242,1);
+    background-image: linear-gradient(to top right,rgb(46, 56, 175),rgb(82, 93, 218));
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    gap: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: none;
+    transition: all .6s  ease;
+  }
+  
+  .updateButton span {
+    background-color: rgb(82, 93, 218);
+    display: grid;
+    position: absolute;
+    right: 0;
+    place-items: center;
+    width: 3rem;
+    height: 100%;
+  }
+  
+  .updateButton span svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .updateButton:hover {
+    box-shadow: 0 4px 30px  rgba(4, 175, 255, .1), 0 2px 30px rgba(11, 158, 255, 0.06);
+  }
+
+  .flex{
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+  }
