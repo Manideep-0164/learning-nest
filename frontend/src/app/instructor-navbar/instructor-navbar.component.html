@@ -1,0 +1,35 @@
+<header class="navbar">
+    <div class="brand">EduHub - Instructor's Place</div>
+    <nav class="nav-options">
+      <a routerLink="/instructor">Dashboard</a>
+      <a routerLink="/instructor/assignments">Assignments</a>
+      <a routerLink="/instructor/announcements">Announcements</a>
+    </nav>
+  
+    <div class="profile" *ngIf="this.globalService.isInstructorLogin; else btns">
+      <!-- Your content for when isLogin is true -->
+      <p-avatar
+        [label]="getFirstLetter()"
+        styleClass="mr-2"
+        size="large"
+        [style]="{ 'background-color': '#2196F3', color: '#ffffff', 'size': '30px' }"
+        shape="circle"
+      ></p-avatar>
+  
+      <p-menubar [model]="items" styleClass="custom-menubar"></p-menubar>
+    </div>
+  
+    <ng-template #btns>
+      <div class="auth-buttons">
+        <button class="button" routerLink="instructor/signup">
+          <i class="pi pi-user svg-icon" style="font-size: 1.2rem"></i>
+          <span class="lable">Sign Up</span>
+        </button>
+        <button class="button" routerLink="instructor/signin">
+          <i class="pi pi-user svg-icon" style="font-size: 1.2rem"></i>
+          <span class="lable">Sign In</span>
+        </button>
+      </div>
+    </ng-template>
+  </header>
+  

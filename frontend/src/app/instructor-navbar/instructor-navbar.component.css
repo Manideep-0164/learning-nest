@@ -1,0 +1,109 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #6558d3;
+    color: #fff;
+  }
+  
+  .brand {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .nav-options {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-options a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .signup,
+  .signin {
+    padding: 6px 12px;
+    border: none;
+    background-color: #ff9800;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .signup:hover,
+  .signin:hover {
+    background-color: #e57373;
+  }
+  
+  
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    gap: 8px;
+    height: 40px;
+    width: 151px;
+    border: none;
+    background: #FFA726;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .lable {
+    line-height: 22px;
+    font-size: 17px;
+    color: #fff;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+  }
+  
+  .button:hover {
+    background: #edaa46;
+  }
+  .svg-icon{
+    color: white;
+  }
+  .button:hover .svg-icon {
+    animation: slope 1s linear infinite;
+  }
+  
+  @keyframes slope {
+    0% {
+    }
+  
+    50% {
+      transform: rotate(10deg);
+    }
+  
+    100% {
+    }
+  }
+  
+  
+  .profile{
+    display: flex;
+   align-items: center;
+  }
+
+  ::ng-deep .custom-menubar {
+    background-color: #6558d3;
+    border: none;
+   color: white;
+   
+    font-weight: 400;
+    
+  }
+
+  ::ng-deep .custom-menubar>span {
+    color: #fff; /* Change to the desired text color */
+  }
