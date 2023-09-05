@@ -1,0 +1,41 @@
+<div class="main" [class.blur]="is_loading">
+    <form class="form" (submit)="handleLogin()">
+      <p-toast position="top-center" key="tc"></p-toast>
+
+      <p class="title">Instructor Login </p>
+      <p class="message">Signin now and get full access to our app. </p>
+      
+              
+      <label>
+          <input required="" [(ngModel)]="email" type="email" class="input" [ngModelOptions]="{ standalone: true }">
+          <span>Email</span>
+      </label> 
+          
+      <label>
+          <input [(ngModel)]="password" type="password" class="input" [ngModelOptions]="{ standalone: true }" required>
+          <span>Password</span>
+      </label>
+    
+      <button class="submit">Sign In</button>
+      <p class="signin">Create a account ? <a routerLink="/instructor/signup">Signup</a> </p>
+    </form>
+  </div>
+
+  <div class="modal-overlay" *ngIf="is_loading">
+    <div class="spinner center"  >
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+      <div class="spinner-blade"></div>
+  </div>
+  </div>
+
+ 
