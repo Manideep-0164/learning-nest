@@ -1,0 +1,33 @@
+<title>Assignment</title>
+
+<div class="main">
+    <h2 class="title">{{assignment.title}}</h2>
+    <div class="duedate">
+        <span>Due Date: <strong>{{assignment.due_date}}</strong></span>
+    </div>
+
+    <p-toast></p-toast>
+    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
+    <div>
+        <div class="assignment">
+            <h2>Description :</h2>
+            <div class="assignmentview" [innerHTML]="assignment.description ? sanitizeAndTrustHtml(assignment.description) : '<h1>Loading...</h1>'"></div>
+        </div>
+    
+        <div class="submit">
+            <span class="p-float-label">
+                <input pInputText id="username"  [(ngModel)]="submittedData" [ngModelOptions]="{ standalone: true }" />
+                <label htmlFor="username" >Submit Your Link</label>
+            </span>
+            <span class="btn">
+                <p-button label="Submit" class="button" (onClick)="handleAddSubmission()" icon="pi pi-check"></p-button>
+            </span>
+        </div>
+    </div>
+
+
+
+ 
+
+</div>
