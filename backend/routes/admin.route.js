@@ -30,6 +30,40 @@ adminRouter.post("/api/admin/signup", async (req, res) => {
   }
 });
 
+adminRouter.post("/api/admin/signin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const adminExist = await Admin.findOne({ where: { email: email } });
+    if (!adminExist)
+      return res.json({ message: "User does not exist, Please Register!" });
+
+    const passwordMatch = bcrypt.compareSync(password, adminExist.password);
+
+    if (!passwordMatch)
+      return res.json({ message: "Invalid credentials, Please try again!" });
+
+    const payload = {
+      role: adminExist.role,
+      id: adminExist.id,
+      email: adminExist.email,
+    };
+
+    const token = jwt.sign(payload, process.env.ADMIN_SECRET, {
+      expiresIn: "12H",
+    });
+
+    res.json({
+      message: "Login Success",
+      token: token,
+      name: adminExist.name,
+      id: adminExist.id,
+    });
+  } catch (err) {
+    console.error("Error fetching admins:", err);
+    res.send({ error: err.message });
+  }
+});
+
 module.exports = {
   adminRouter,
 };
