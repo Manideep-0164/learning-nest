@@ -1,0 +1,118 @@
+<head>
+  <title>Sign-Up</title>
+</head>
+
+<div class="main" [class.blur]="is_loading">
+  <p-toast position="top-center" key="tc"></p-toast>
+  <form class="form" (submit)="handleCreate()">
+    <p class="title">Student Register</p>
+    <p class="message">Signup now and get full access to our all Courses.</p>
+
+    <label>
+      <input
+        required
+        placeholder=""
+        type="text"
+        [(ngModel)]="name"
+        class="input"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <span>Fullname</span>
+    </label>
+
+    <div class="flex">
+      <p-calendar
+        [(ngModel)]="dob"
+        dateFormat="yy-mm-dd"
+        class="calender"
+        [showIcon]="true"
+        placeholder="Date of Birth"
+        [ngModelOptions]="{ standalone: true }"
+      ></p-calendar>
+
+      <p-selectButton
+        [options]="genders"
+        [(ngModel)]="gender"
+        [multiple]="false"
+        optionLabel="name"
+        class="opt"
+        [ngModelOptions]="{ standalone: true }"
+        optionValue="value"
+      ></p-selectButton>
+    </div>
+
+    <div class="flex">
+      <p-dropdown
+        [options]="major"
+        [(ngModel)]="selectedMajor"
+        [ngModelOptions]="{ standalone: true }"
+        optionLabel="name"
+        [style]="{ width: '220px' }"
+        placeholder="Department"
+      ></p-dropdown>
+      <label class="phone">
+        <input
+          
+          placeholder=""
+          type="number"
+          minlength="10"
+          maxlength="10"
+          [(ngModel)]="contact_number"
+          [ngModelOptions]="{ standalone: true }"
+          class="input"
+          required/>
+        <span>Phone Number</span>
+      </label>
+    </div>
+
+    <label>
+      <input
+        required
+        placeholder=""
+        [(ngModel)]="email"
+        [ngModelOptions]="{ standalone: true }"
+        type="email"
+        class="input"
+      />
+      <span>Email</span>
+    </label>
+
+    <label>
+      <input
+        required
+        placeholder=""
+        [(ngModel)]="password"
+        [ngModelOptions]="{ standalone: true }"
+        type="password"
+        class="input"
+      />
+      <span>Password</span>
+    </label>
+    <label>
+      <input required placeholder="" [(ngModel)]="Confirmpassword" [ngModelOptions]="{ standalone: true }" type="password" class="input" />
+      <span>Confirm password</span>
+    </label>
+    <button class="submit" >Submit</button>
+    
+    <p class="signin">
+      Already have an account ? <a routerLink="/sign-in">Signin</a>
+    </p>
+  </form>
+</div>
+
+<div class="modal-overlay" *ngIf="is_loading">
+  <div class="spinner center"  >
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+    <div class="spinner-blade"></div>
+</div>
+</div>
