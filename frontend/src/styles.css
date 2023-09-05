@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+/* styles.css or styles.scss */
+
+@import 'primeicons/primeicons.css';
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+/* styles.css */
+@import 'quill/dist/quill.core.css';
+@import 'quill/dist/quill.snow.css'; /* or quill.bubble.css or your preferred theme */
+
+
+body {
+    font-family: var(--font-family);
+    background-color: #F7F7F7;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+}
