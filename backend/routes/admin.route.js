@@ -64,6 +64,23 @@ adminRouter.post("/api/admin/signin", async (req, res) => {
   }
 });
 
+// get all admin
+adminRouter.get(
+  "/api/admin",
+  authentication,
+  authorize(["admin"]),
+  async (req, res) => {
+    try {
+      const adminData = await Admin.findAll({});
+
+      res.json(adminData);
+    } catch (err) {
+      console.error("Error fetching admin:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 module.exports = {
   adminRouter,
 };
