@@ -1,5 +1,6 @@
 const express = require("express");
 const { sequelize } = require("./configs/db");
+const { client } = require("./configs/redis");
 const jwt = require("jsonwebtoken");
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
@@ -32,16 +33,23 @@ app.use("", announcementRouter);
 
 app.use("", assignmentRouter);
 
-sequelize
-  .sync()
-  .then(() => {
+client.connect();
+
+client.on("connect", async () => {
+  console.log("Connected to redis");
+  try {
+    await sequelize.sync();
+    console.log("Connected to DB");
     app.listen(1400, async () => {
-      console.log("Connected to DB");
       console.log("Server is running at 1400");
     });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  } catch (error) {
+    console.error("Error during Sequelize sync or server listening:", err);
+  }
+});
+
+client.on("error", (err) => {
+  console.log("Redis error =>", err);
+});
 
 module.exports = app;
