@@ -99,6 +99,8 @@ assignmentRouter.get(
   authorize(["student", "instructor", "admin"]),
   async (req, res) => {
     try {
+      const { course, assignment } = req.query;
+
       Student.hasMany(Enrollment, { foreignKey: "student_id" });
       Enrollment.belongsTo(Student, { foreignKey: "student_id" });
 
@@ -122,13 +124,31 @@ assignmentRouter.get(
                   ROW_NUMBER() OVER (PARTITION BY assignment_id, student_id ORDER BY submission_date DESC) AS rn
             FROM submissions
           ) sub ON a.id = sub.assignment_id AND s.id = sub.student_id AND sub.rn = 1
-          WHERE s.id = :studentId
+          WHERE s.id = :studentId ${course || assignment ? applyFilters() : ``}
         `;
+
+      function applyFilters() {
+        if (course) {
+          return `AND LOWER(c.name) LIKE LOWER("%${course}%");`;
+        }
+
+        return `AND LOWER(a.title) LIKE LOWER("%${assignment}%");`;
+      }
 
       const studentAssignmentData = await sequelize.query(query, {
         type: Sequelize.QueryTypes.SELECT,
         replacements: { studentId: req.params.id }, // Replace with the actual student ID
       });
+
+      if (course && studentAssignmentData.length === 0)
+        return res.json({
+          message: "No assignments found with given course!",
+        });
+
+      if (assignment && studentAssignmentData.length === 0)
+        return res.json({
+          message: "No assignments found with given assignment's title!",
+        });
 
       if (studentAssignmentData.length === 0)
         return res.json({
