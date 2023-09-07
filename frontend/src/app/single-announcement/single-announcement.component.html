@@ -1,0 +1,18 @@
+<div class="email-view">
+    <div class="email-header">
+      <h2>{{ announcement.title }}</h2>
+      <p class="course-id">Course ID: {{ announcement.course_id }}</p>
+      <p class="publish-date">Publish Date: {{ announcement.publish_date | date }}</p>
+    </div>
+  
+    <div class="email-body">
+      <p class="description">{{ announcement.description }}</p>
+    </div>
+
+
+    <div class="back-button">
+        <a routerLink="/announcements">Go Back</a>
+      </div>
+
+  </div>
+  

@@ -79,7 +79,6 @@ instructorRouter.post("/api/instructor/signin", async (req, res) => {
       role: instructorExist.role,
       id: instructorExist.id,
       email: instructorExist.email,
-      course_id: instructorExist.course_id,
     };
     const token = jwt.sign(payload, process.env.INSTRUCTOR_SECRET, {
       expiresIn: "12H",

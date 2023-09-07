@@ -12,6 +12,20 @@ const { authorize } = require("../middlewares/authorization.middleware");
 
 assignmentRouter.use(authentication);
 
+assignmentRouter.get(
+  "/api/assignment",
+  authorize(["admin", "instructor"]),
+  async (req, res) => {
+    try {
+      const assignmentsData = await Assignment.findAll({});
+      res.json(assignmentsData);
+    } catch (err) {
+      console.error("Error fetching assignments:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 assignmentRouter.post(
   "/api/assignment",
   authorize(["instructor"]),

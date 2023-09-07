@@ -1,3 +1,4 @@
+// import { createClient } from 'redis';
 const Redis = require("redis");
 require("dotenv").config();
 

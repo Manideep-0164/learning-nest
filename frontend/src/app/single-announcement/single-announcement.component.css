@@ -1,0 +1,53 @@
+.email-view {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .email-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .email-header p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .email-body {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .email-body .description {
+    line-height: 1.6;
+  }
+  
+  .course-id, .publish-date {
+    margin: 0;
+  }
+  
+  .back-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .back-button a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .back-button a:hover {
+    background-color: #0056b3;
+  }
+  

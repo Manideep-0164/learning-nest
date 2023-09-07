@@ -26,6 +26,8 @@ export class AllCoursesComponent implements OnInit {
     this.http.get(`https://seqli.vercel.app/api/department/courses`).subscribe((res)=>{
       this.departments = res
       this.is_loading=false;
+      console.log(res);
+      
     })
 
 

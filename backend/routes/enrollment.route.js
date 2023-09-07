@@ -12,22 +12,16 @@ const { authentication } = require("../middlewares/authentication.middleware");
 const { authorize } = require("../middlewares/authorization.middleware");
 const enrollmentRouter = express.Router();
 
-// enrollments
-enrollmentRouter.post(
+enrollmentRouter.get(
   "/api/enrollment",
   authentication,
-  authorize(["student"]),
+  authorize(["admin"]),
   async (req, res) => {
     try {
-      const { enroll_date, student_id, course_id } = req.body;
-      const enrollMents = await Enrollment.create({
-        enroll_date,
-        student_id,
-        course_id,
-      });
-      res.json(enrollMents);
+      const enrollmentData = await Enrollment.findAll({});
+      res.json(enrollmentData);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching enrollments:", err);
       res.send({ error: err.message });
     }
   }
@@ -71,17 +65,32 @@ enrollmentRouter.get(
   }
 );
 
-// get all enrollments
-enrollmentRouter.get(
+// enrollments
+enrollmentRouter.post(
   "/api/enrollment",
   authentication,
-  authorize(["admin"]),
+  authorize(["student"]),
   async (req, res) => {
     try {
-      const enrollmentData = await Enrollment.findAll({});
-      res.json(enrollmentData);
+      const { enroll_date, student_id, course_id } = req.body;
+
+      const isEnrolled = await Enrollment.findOne({
+        where: {
+          student_id: student_id,
+          course_id: course_id,
+        },
+      });
+
+      if (isEnrolled) return res.json({ message: "Already enrolled!" });
+
+      const enrollMents = await Enrollment.create({
+        enroll_date,
+        student_id,
+        course_id,
+      });
+      res.json(enrollMents);
     } catch (err) {
-      console.error("Error fetching enrollments:", err);
+      console.error(err);
       res.send({ error: err.message });
     }
   }

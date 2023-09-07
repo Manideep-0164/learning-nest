@@ -1,0 +1,40 @@
+<div class="main">
+  <h1>Make Announcements</h1>
+    <div class="writemessage">
+        <div class="inputs">
+            <input type="text" pInputText placeholder="Enter Title" [(ngModel)]="title" [ngModelOptions]="{ standalone: true }" />
+            <textarea rows="30" cols="30" [(ngModel)]="description" pInputTextarea placeholder="Description here..." [ngModelOptions]="{ standalone: true }"></textarea>
+            
+            <p-button label="Send" (onClick)="sendAnnouncement()"></p-button>
+        </div>
+    </div>
+
+
+    <div class="announcement-container">
+        <h1>Your Announcements</h1>
+        <div class="announcement-list" *ngIf="!empty; else Empty">
+          <!-- Loop through your announcements and display them -->
+          <div class="announcement-card" *ngFor="let announcement of allAnnouncements">
+            <div class="announcement-icon">
+              <!-- You can replace 'announcement-icon.png' with your icon URL -->
+              <i class="pi pi-megaphone" style="font-size: 2rem"></i>
+            </div>
+            <div class="announcement-details">
+              <h2>{{ announcement.title }}</h2>
+              <p>{{ announcement.publish_date | timeAgo }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+      <ng-template #Empty >
+        <div class="empty"  >
+          <div class="text">
+            <h1>No Announcements Available!</h1>
+          </div>
+        </div>
+      </ng-template>
+
+
+</div>

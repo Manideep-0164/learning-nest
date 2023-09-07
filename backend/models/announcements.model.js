@@ -20,7 +20,7 @@ const Announcement = sequelize.define(
       allowNull: false,
     },
     publish_date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     course_id: {

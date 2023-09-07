@@ -39,10 +39,10 @@ export class InstructorsingleassignComponent implements OnInit {
     });
     const assignmentId = this.route.snapshot.params['id'];
     this.http.get(`${environment.API_URL}/api/assignment/${assignmentId}`, { headers }).subscribe((res:any) => {
-      this.assignment = res[0];
-      this.title = res[0]?.title;
-      this.due_date = res[0]?.due_date
-      this.text = res[0]?.description
+      this.assignment = res;
+      this.title = res.title;
+      this.due_date = res.due_date
+      this.text = res.description
       console.log(res);
       
     })

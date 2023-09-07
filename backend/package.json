@@ -1,20 +1,17 @@
 {
-  "name": "backend",
+  "name": "day-1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon index.js",
-    "build": "mkdir -p public && touch public/dummy.txt"
+    "server": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -23,6 +20,7 @@
     "mongoose": "^6.9.1",
     "mysql2": "^3.6.0",
     "nodemon": "^2.0.20",
+    "redis": "^4.6.8",
     "sequelize": "^6.32.1"
   }
 }

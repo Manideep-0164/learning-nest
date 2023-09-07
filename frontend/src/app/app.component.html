@@ -5,6 +5,6 @@
 
 <!-- Display the router outlet for routing content -->
 <router-outlet></router-outlet>
-
+<app-chatbot [data]="isStudent? StudentName : instructorName "></app-chatbot>
 <!-- Display the footer (assuming this is the same for both students and instructors) -->
 <app-footer></app-footer>

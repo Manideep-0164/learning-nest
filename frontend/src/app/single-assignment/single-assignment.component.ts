@@ -41,12 +41,12 @@ export class SingleAssignmentComponent implements OnInit {
     });
     const assignmentId = this.route.snapshot.params['id'];
     this.assignment_id = assignmentId
-    this.http.get(`${environment.API_URL}/api/assignment/${assignmentId}`, { headers }).subscribe((res:any) => {
+    this.http.get(`${environment.API_URL}/api/assignment/${assignmentId}/student/${this.globalService.getStudentLoginDetails()?.id}`, { headers }).subscribe((res:any) => {
       
-      this.assignment = res[0];
-      this.assigment_date = res[0].due_date;
-      this.submittedData = res[0].submittedData
       console.log(res);
+      this.assignment = res[0];
+      this.assigment_date = res[0]?.due_date;
+      this.submittedData = res[0]?.submittedData
       
     })
   }

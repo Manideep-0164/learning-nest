@@ -41,6 +41,16 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { InstructorsingleassignComponent } from './instructorsingleassign/instructorsingleassign.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { CourseAssignmentsComponent } from './course-assignments/course-assignments.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
+import { DialogModule } from 'primeng/dialog';
+import { AnnouncementComponent } from './announcement/announcement.component';
+import { TableModule } from 'primeng/table';
+import { ChartModule } from 'primeng/chart';
+import { InstructorAnnouncementComponent } from './instructor-announcement/instructor-announcement.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TimeAgoPipe } from './time-ago.pipe';
+import { SingleAnnouncementComponent } from './single-announcement/single-announcement.component';
 
 
 @NgModule({
@@ -61,6 +71,13 @@ import { ConfirmationService } from 'primeng/api';
     InstructorDashboardComponent,
     LayoutComponent,
     InstructorsingleassignComponent,
+    CourseAssignmentsComponent,
+    ChatbotComponent,
+    AnnouncementComponent,
+    InstructorAnnouncementComponent,
+    TimeAgoPipe,
+    SingleAnnouncementComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -85,7 +102,11 @@ import { ConfirmationService } from 'primeng/api';
     MenubarModule,
     SkeletonModule,
     ProgressSpinnerModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DialogModule,
+    TableModule,
+    ChartModule,
+    InputTextModule
   ],
   providers: [DatePipe,MessageService,ConfirmationService],
   bootstrap: [AppComponent]

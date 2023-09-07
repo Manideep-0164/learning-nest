@@ -1,0 +1,45 @@
+<div class="main">
+
+<h1>Student Details</h1>
+<p-table [value]="students" [tableStyle]="{ 'min-width': '50rem' }" *ngIf="!empty; else Empty">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Sr.no</th>
+            <th>Name</th>
+            <th>Major</th>
+            <th>Contact Number</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-student let-i="rowIndex">
+        <tr>
+            <td>{{ i+1 }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.major }}</td>
+            <td>{{ student.contact_number }}</td>
+        </tr>
+    </ng-template>
+
+
+</p-table>
+
+<ng-template #Empty  >
+    <div class="empty"  >
+      <div class="text">
+        <ng-container *ngIf="signin; else noStudents">
+            Please <a href="/instructor/signin">Login</a> to View Students
+          </ng-container>
+          <ng-template #noStudents>
+            No Students Enrolled!
+          </ng-template>
+      </div>
+    </div>
+</ng-template>
+
+
+<div class="chart">
+    <h2>Assignment Submission Chart : </h2>
+    <p-chart type="pie" [data]="data" width="400px" [style]="{'margin': 'auto'}" [options]="options"></p-chart>
+</div>
+
+
+</div>

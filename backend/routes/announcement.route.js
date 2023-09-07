@@ -7,36 +7,6 @@ const { Announcement } = require("../models/announcements.model");
 const { sequelize } = require("../configs/db");
 const { Sequelize } = require("sequelize");
 
-announcementRouter.post(
-  "/api/announcement",
-  authentication,
-  authorize(["admin"]),
-  async (req, res) => {
-    try {
-      const { title, description, publish_date, course_id, department_id } =
-        req.body;
-
-      if (!course_id && !department_id)
-        return res.json({
-          message: "Must provide course_id or department_id!",
-        });
-
-      const announcement = await Announcement.create({
-        title,
-        description,
-        publish_date,
-        course_id,
-        department_id,
-      });
-
-      res.json({ message: "Announcement posted.", announcement });
-    } catch (err) {
-      console.error("Error fetching announcement:", err);
-      res.send({ error: err.message });
-    }
-  }
-);
-
 // get announcements based on department id
 announcementRouter.get(
   "/api/announcement/department/:id",
@@ -94,6 +64,108 @@ announcementRouter.get(
         });
 
       res.json(announcements);
+    } catch (err) {
+      console.error("Error fetching announcement:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
+// get all announcements
+announcementRouter.get(
+  "/api/announcement",
+  authentication,
+  authorize(["student", "instructor", "admin"]),
+  async (req, res) => {
+    try {
+      const announcements = await Announcement.findAll({});
+      if (announcements.length === 0)
+        return res.json({ message: "No announcements found." });
+
+      res.json(announcements);
+    } catch (error) {}
+  }
+);
+
+// get the announcements based on the student enrolled courses using student id
+announcementRouter.get(
+  "/api/announcement/student/:id",
+  authentication,
+  authorize(["student", "instructor", "admin"]),
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const query = `
+        SELECT a.*
+        FROM announcements a
+        JOIN courses c ON c.id = a.course_id
+        JOIN enrollments e ON e.course_id = c.id
+        JOIN students s ON s.id = e.student_id
+        WHERE s.id = :studentId;
+    `;
+
+      const announcementsOfStudentCourses = await sequelize.query(query, {
+        type: Sequelize.QueryTypes.SELECT,
+        replacements: { studentId: id },
+      });
+
+      if (announcementsOfStudentCourses.length === 0)
+        return res.status(404).json({ message: "No announcements found." });
+
+      return res.json(announcementsOfStudentCourses);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: error.message });
+    }
+  }
+);
+
+announcementRouter.get(
+  "/api/announcement/:id",
+  authentication,
+  authorize(["student", "instructor", "admin"]),
+  async (req, res) => {
+    try {
+      const announcement = await Announcement.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      if (!announcement)
+        return res.json({ message: "announcement does not exist." });
+
+      res.json(announcement);
+    } catch (error) {
+      console.error("Error fetching announcement:", error);
+      res.send({ error: error.message });
+    }
+  }
+);
+
+announcementRouter.post(
+  "/api/announcement",
+  authentication,
+  authorize(["admin", "instructor"]),
+  async (req, res) => {
+    try {
+      const { title, description, publish_date, course_id, department_id } =
+        req.body;
+
+      if (!course_id && !department_id)
+        return res.json({
+          message: "Must provide course_id or department_id!",
+        });
+
+      const announcement = await Announcement.create({
+        title,
+        description,
+        publish_date,
+        course_id,
+        department_id,
+      });
+
+      res.json({ message: "Announcement posted.", announcement });
     } catch (err) {
       console.error("Error fetching announcement:", err);
       res.send({ error: err.message });

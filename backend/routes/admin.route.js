@@ -7,6 +7,23 @@ const { authentication } = require("../middlewares/authentication.middleware");
 const { authorize } = require("../middlewares/authorization.middleware");
 const { Admin } = require("../models/admin.model");
 
+// get all admin
+adminRouter.get(
+  "/api/admin",
+  authentication,
+  authorize(["admin"]),
+  async (req, res) => {
+    try {
+      const adminData = await Admin.findAll({});
+
+      res.json(adminData);
+    } catch (err) {
+      console.error("Error fetching admin:", err);
+      res.send({ error: err.message });
+    }
+  }
+);
+
 adminRouter.post("/api/admin/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -47,7 +64,6 @@ adminRouter.post("/api/admin/signin", async (req, res) => {
       id: adminExist.id,
       email: adminExist.email,
     };
-
     const token = jwt.sign(payload, process.env.ADMIN_SECRET, {
       expiresIn: "12H",
     });
@@ -63,23 +79,6 @@ adminRouter.post("/api/admin/signin", async (req, res) => {
     res.send({ error: err.message });
   }
 });
-
-// get all admin
-adminRouter.get(
-  "/api/admin",
-  authentication,
-  authorize(["admin"]),
-  async (req, res) => {
-    try {
-      const adminData = await Admin.findAll({});
-
-      res.json(adminData);
-    } catch (err) {
-      console.error("Error fetching admin:", err);
-      res.send({ error: err.message });
-    }
-  }
-);
 
 module.exports = {
   adminRouter,

@@ -12,3 +12,57 @@
     justify-content: space-around;
     align-items: center;
 }
+
+.main{
+    width: 70%;
+    margin:20px auto;
+    background-color: white;
+    padding: 10px;
+}
+
+
+/* Style the table header */
+.p-table thead th {
+    background-color: #f0f0f0;
+  }
+  
+  /* Style the table body */
+  .p-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .p-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  .p-table tbody tr:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Style the table cells */
+  .p-table tbody td {
+    padding: 8px;
+  }
+  
+  /* Add some space around the table */
+  .p-table {
+    margin-top: 16px;
+  }
+
+  .chart{
+    width: 38%;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+
+  .empty{
+    width: 100%;
+    height: 500px;
+    margin: auto ;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

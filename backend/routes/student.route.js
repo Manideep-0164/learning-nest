@@ -1,16 +1,16 @@
 const express = require("express");
-require("dotenv").config();
+const { Student } = require("../models/student.model");
+const studentRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const studentRouter = express.Router();
-const { sequelize } = require("../configs/db");
-const { Student } = require("../models/student.model");
+require("dotenv").config();
+const { authentication } = require("../middlewares/authentication.middleware");
+const { authorize } = require("../middlewares/authorization.middleware");
 const { Sequelize } = require("sequelize");
+const { sequelize } = require("../configs/db");
 const { Enrollment } = require("../models/enrollment.model");
 const { Course } = require("../models/course.model");
 const { Instructor } = require("../models/instructor.model");
-const { authentication } = require("../middlewares/authentication.middleware");
-const { authorize } = require("../middlewares/authorization.middleware");
 
 // get all students
 studentRouter.get(

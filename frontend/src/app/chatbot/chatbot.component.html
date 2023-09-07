@@ -1,0 +1,25 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+
+
+<button class="chatbot" (click)="showDialog()">
+    <span class="material-symbols-outlined">
+        smart_toy
+    </span>
+</button>
+
+   
+
+<p-dialog header="Chatbot" [(visible)]="visible" [modal]="true" [draggable]="false" [resizable]="false" [style]="{ 'width': '550px' }">
+    <div class="chat-container" #chatContainer>
+        <div *ngFor="let message of chatMessages" class="chat-message" [ngClass]="{'user-message': message.isUser, 'bot-message': !message.isUser}">
+            {{ message.text }}
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" placeholder="Type your message">
+        <button (click)="sendMessage()">Send</button>
+    </div>
+</p-dialog>
+

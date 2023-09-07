@@ -10,7 +10,8 @@
         <i class="pi pi-book"></i>
         <span style="margin-left: 5px">Assignments</span>
       </ng-template>
-      <div class="card" *ngFor="let assignment of assignments" [routerLink]="['/instructor/assignments', assignment.id]">
+      <ng-template #content>
+      <div class="card"  *ngFor="let assignment of assignments" [routerLink]="['/instructor/assignments', assignment.id]">
         <div class="img">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -128,14 +129,103 @@
         > -->
 
       </div>
+    </ng-template>
+     
+        <div class="empty" *ngIf="empty; else content" >
+          <div class="text">
+            <h1>No Assignments Available!</h1>
+            <button class="button">
+              <i class="pi pi-heart svg-icon" style="font-size: 1.5rem"></i>
+              <span class="lable">Add Assignments></span>
+            </button>
+          </div>
+        </div>
+      
     </p-tabPanel>
     <p-tabPanel header="Header II">
       <ng-template pTemplate="header">
         <i class="pi pi-bolt"></i>
         <span style="margin-left: 5px">AI</span>
       </ng-template>
+<!-- ************************************* AI ************************************* -->
 
-      <p-editor [(ngModel)]="text" [style]="{ height: '320px' }"></p-editor>
+     <div class="aiinputs">
+      <input pInputText type="text" style="height: 47px;" class="p-inputtext-lg" placeholder="Course" [(ngModel)]="course" />
+      <input pInputText type="text" style="height: 47px;" class="p-inputtext-lg" placeholder="Concept" [(ngModel)]="concept" />
+      <p-selectButton [options]="levels" [(ngModel)]="Levelvalue" [multiple]="false" optionLabel="name" optionValue="value"></p-selectButton>
+     </div>
+
+     <ng-template #Button>
+      <div class="flexbox">
+        <button class="buttonAi" (click)="generateAssignment()">
+         Generate Assignment
+       </button>
+      </div>
+      </ng-template>
+
+      
+      <div class="center" *ngIf="loadergenrating; else Button">
+        <div id="wifi-loader">
+          <svg class="circle-outer" viewBox="0 0 86 86">
+              <circle class="back" cx="43" cy="43" r="40"></circle>
+              <circle class="front" cx="43" cy="43" r="40"></circle>
+              <circle class="new" cx="43" cy="43" r="40"></circle>
+          </svg>
+          <svg class="circle-middle" viewBox="0 0 60 60">
+              <circle class="back" cx="30" cy="30" r="27"></circle>
+              <circle class="front" cx="30" cy="30" r="27"></circle>
+          </svg>
+          <svg class="circle-inner" viewBox="0 0 34 34">
+              <circle class="back" cx="17" cy="17" r="14"></circle>
+              <circle class="front" cx="17" cy="17" r="14"></circle>
+          </svg>
+          <div class="text" data-text="Generating Assignment"></div>
+      </div>
+      </div>
+    
+
+      <div class="assignadd">
+        <div class="coolinput">
+          <label for="input" class="text">Assignment Name:</label>
+          <input
+            type="text"
+            placeholder="Write here..."
+            name="input"
+            class="input"
+            [(ngModel)]="name"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+
+        <p-calendar
+          [(ngModel)]="date"
+          dateFormat="yy-mm-dd"
+          class="calender"
+          [showIcon]="true"
+          placeholder="Due Date"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-calendar>
+      </div>
+      <p-editor [(ngModel)]="text" [style]="{ height: 'max-height' }"></p-editor>
+
+      <div class="flex">
+        <button class="button2" (click)="handleAssignment()" [disabled]="loading">
+          <span *ngIf="!loading; else loadingind">Submit</span>
+
+          <ng-template #loadingind>
+            <section class="dots-container">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </section>
+          </ng-template>
+          
+
+        </button>
+  
+      </div>
 
       <!-- <button (click)="handleEditor()">Click</button> -->
     </p-tabPanel>
