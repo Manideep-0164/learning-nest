@@ -1,10 +1,12 @@
 ---
-⭐Deployed Link:- learning-nest-delta.vercel.app/
+⭐Deployed Link:- https://learning-nest-delta.vercel.app/
 ---
 
 # LearningNest
 
-## Welcome to LearningNest, the innovative Learning Management System (LMS) designed to redefine education. Our platform simplifies course management, assignment tracking, and communication for students, instructors, and institutions. Beyond the basics, LearningNest leverages AI for personalized learning and fosters collaboration through Collaborative Learning Spaces, ensuring education is a dynamic, adaptive experience.
+## Introduction
+
+Welcome to LearningNest, the innovative Learning Management System (LMS) designed to redefine education. Our platform simplifies course management, assignment tracking, and communication for students, instructors, and institutions. Beyond the basics, LearningNest leverages AI for personalized learning and fosters collaboration through Collaborative Learning Spaces, ensuring education is a dynamic, adaptive experience.
 
 ## Key Features
 
@@ -41,7 +43,27 @@ To run the project locally, follow these steps:
     ng serve
 ```
 
-### Endpoints and Usage
+## Usage
+
+### Student Section:
+
+- Users should register and log in to access the student features.
+- After logging in, students can enroll in courses.
+- The dashboard displays all enrolled courses. Click on a course to access related assignments.
+- In the assignments section, students can view, filter, and submit assignments for their enrolled courses.
+- Students can check for announcements in a dedicated section.
+- Explore the chatbot feature for additional assistance.
+
+### Instructor Section:
+
+- Instructors should register and log in to access instructor features.
+- During registration, instructors choose the course they will teach.
+- The dashboard displays enrolled students and their assignment submission statistics for the chosen course.
+- Manually post assignments.
+- Use AI to generate assignments based on course, concept, and difficulty level.
+- Instructors can post announcements specific to their courses.
+
+## Endpoints
 
 ### Student
 
