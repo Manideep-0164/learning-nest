@@ -16,7 +16,7 @@ const Submission = sequelize.define(
       allowNull: false,
     },
     submission_date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     status: {

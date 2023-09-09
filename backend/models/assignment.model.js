@@ -19,7 +19,7 @@ const Assignment = sequelize.define(
       allowNull: false,
     },
     due_date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
     },
     course_id: {
